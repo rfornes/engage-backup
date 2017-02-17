@@ -1,0 +1,11 @@
+	<footer>
+	  <!-- <div class="">	   -->
+	  <div class="copyright">
+	  	<div class="footer-content">{{ with .Site.Copyright }}{{ . | safeHTML }}{{ else }}<span>&copy; {{ .Site.Title }}</span>{{ end }}</div>
+	  </div>
+	    
+	  <!-- </div> -->
+	</footer>
+{{ template "_internal/google_analytics.html" . }}
+</body>
+</html>

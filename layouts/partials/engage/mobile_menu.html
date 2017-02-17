@@ -1,0 +1,29 @@
+{{- $baseUrl := .Site.BaseURL -}}
+<div class="modal fade mobile-menu-modal" id="mobile-menu-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">      
+      <div class="modal-header row">
+        <div class="col-xs-2">
+          <button type="button" class="close pull-left" data-dismiss="modal"></button>        
+        </div>
+        <div class="col-xs-8">
+          <a class="mobile-menu-logo" href="{{$baseUrl}}" title="Return to homepage">
+            <img class="img-responsive" src='{{$baseUrl}}/{{ .Type }}/images/logo.png' alt="{{ .Site.Title }}" />
+          </a>
+        </div>
+        <div class="col-xs-2"></div>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-justified">
+          {{- with .Site.Menus.main -}}
+          {{- range sort . "Weight" "desc" -}}
+            <li><a class="main" href="{{.URL}}">{{ .Name }}</li></a>
+          {{ end }}
+          {{- else -}}
+            No navigation
+          {{ end }}          
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

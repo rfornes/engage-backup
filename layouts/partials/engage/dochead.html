@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{{- range $i, $def := (getJSON (printf "themes/tvpage/defaults/%s.json" .Type)).option -}}
+  {{- $.Scratch.SetInMap "settings" .code .value -}}
+{{ end }}
+{{- range $i, $param := .Params -}}
+  {{- $.Scratch.SetInMap "settings" $i . -}}
+{{ end }}
+{{- if isset .Site.Params "tvppages" -}}
+  {{- range (.Param "tvppages") -}}
+    {{- $.Scratch.SetInMap "settings" .code .value -}}
+  {{ end }}
+{{ end }}
+{{- $.Scratch.Set "siteDescription" .Params.description -}}
+{{ $.Scratch.Set "siteTitle" (printf "%s - %s" .Title .Site.Title )  }}
+{{- if eq .Layout "index" -}}
+  {{- $.Scratch.Set "siteTitle" .Site.Title -}}
+{{- end -}}
+{{- $baseUrl := .Site.BaseURL -}}
+<html>
+  <head>
+    {{- partial (printf "%s/favicon.html" .Type) . -}}
+    {{- partial (printf "%s/single-meta.html" .Type) . -}}
+    {{- block "meta" . -}}{{ end }}
+    <link rel="apple-touch-icon" href="{{$baseUrl}}/{{ .Type }}/images/logo.png">
+    <link rel="stylesheet" href="{{$baseUrl}}/{{ .Type }}/css/styles.css">
+    <style>{{ replaceRE " +" " " (replaceRE "\n" "" (partial (printf "%s/css.html" .Type ) .)) | safeCSS }}</style>
+  </head>
+  <body>
+  <h1 class="seo">{{- $.Scratch.Get "siteTitle" -}}</h1>

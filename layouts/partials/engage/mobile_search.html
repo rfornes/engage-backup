@@ -1,0 +1,35 @@
+{{- $baseUrl := .Site.BaseURL -}}
+<div class="modal fade mobile-search-modal" id="mobile-search-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">      
+      <div class="modal-header row">
+        <div class="col-xs-2">
+          <button type="button" class="close pull-left" data-dismiss="modal"></button>        
+        </div>
+        <div class="col-xs-8">
+          <a class="mobile-menu-logo" href="{{$baseUrl}}" title="Return to homepage">
+            <img class="img-responsive" src='{{$baseUrl}}/{{ .Type }}/images/logo.png' alt="{{ .Site.Title }}" />
+          </a>
+        </div>
+        <div class="col-xs-2"></div>
+      </div>
+      <div class="modal-body">
+        <div class="mobile-search-modal-header">
+          <button class="mobile-search-modal-search-btn pull-left" type="button"></button>
+          <input id="tvp-mobile-search-input" type="text" placeholder="SEARCH">
+          <button class="mobile-search-modal-cancel-btn pull-right" type="button"></button>
+        </div>
+        <p id="tvp-mobile-null-results" class="tvp-mobile-null-results">
+          No results found for: <b></b>
+        </p>
+        <div id="tvp-mobile-search-results-holder" class="tvp-mobile-search-results-holder">
+            <div id="tvp-mobile-search-results" class="tvp-mobile-search-results">
+                <ul id="tvp-result-list">
+
+                </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

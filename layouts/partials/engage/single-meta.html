@@ -1,0 +1,28 @@
+{{- $.Scratch.Set "siteDescription" .Params.description -}}
+{{ $.Scratch.Set "siteTitle" (printf "%s - %s" .Title .Site.Title )  }}
+{{ if eq .Layout "index" }}
+	{{- $.Scratch.Add "metaImg" ( printf "%s/%s/images/logo.png" .Site.BaseURL .Type ) -}}
+	{{- $.Scratch.Set "siteDescription" .Site.Params.description -}}
+	{{- $.Scratch.Set "siteTitle" .Site.Title -}}
+{{ else if eq .Layout "channel" }}
+	{{- $.Scratch.Add "metaImg" ( printf "%s/%s/images/channel/%s.jpg" .Site.BaseURL .Type .Params.channelid ) -}}
+{{ else if eq .Layout "channelVideo" }}
+	{{- $video := index $.Site.Data.videos (printf "x%s" .Params.videoid ) -}}
+	{{- $.Scratch.Add "metaImg" $video.asset.thumbnailUrl -}}
+{{ end}}
+<meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+{{- .Hugo.Generator -}}
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="description" content="{{ replaceRE "\n" "" ( $.Scratch.Get "siteDescription" | default .Summary) }}">
+<meta property="og:url"                content="{{ .Permalink }}" />
+<meta property="og:type"               content="website" />
+<meta property="og:title"              content='{{- $.Scratch.Get "siteTitle" -}}' />
+<meta property="og:image"              content="{{ $.Scratch.Get "metaImg" }}" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="{{ .Permalink }}">
+<meta name="twitter:title" content="{{- $.Scratch.Get "siteTitle" -}}">
+<meta name="twitter:description" content="{{ replaceRE "\n" "" ( $.Scratch.Get "siteDescription" | default .Summary) }}">
+<meta name="twitter:image" content="{{ $.Scratch.Get "metaImg" }}">
+<title>{{- $.Scratch.Get "siteTitle" -}}</title>

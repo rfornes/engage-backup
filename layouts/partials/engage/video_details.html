@@ -1,0 +1,61 @@
+<div class="row container tvp-video-container-mobile">
+  <h1 class="video-title-mobile"><span class="video-title-mobile-label">NOW PLAYING: </span><span class="video-title-mobile-title">...</span><span class="caret" data-toggle="collapse" data-target=".video-details-row.description .mobile" aria-expanded="false"></span></h1>
+  <h2 class="section-header-details video-details-header">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#video-details" aria-controls="video-details" role="tab" data-toggle="tab">VIDEO DETAILS</a>
+    </li>
+    <li role="presentation">
+      <a href="#transcript" aria-controls="transcript" role="tab" data-toggle="tab">TRANSCRIPT</a>
+    </li>
+  </ul>
+  
+    <div class="social-share">    
+      SHARE: 
+      {{ if ne .channelEntityType "5" }}            
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" class="
+        share-icon facebook"></a>
+        <a target="_blank" href="https://twitter.com/share?text={{ .title }}&url={{ .Permalink }}" class="share-icon twitter"></a>
+      {{ else }}
+        <a target="_blank" href="" class="
+        share-icon facebook"></a>
+        <a target="_blank" href="" class="share-icon twitter"></a>
+      {{ end }}
+    </div>
+  </h2>
+</div>
+<div class="row video-details">
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="video-details">
+      <div class="col-sm-12 col-md-12 video-details-row">
+        <p class="video-details-meta">Published on: <span class="published-date">{{if ne .channelEntityType "5"}}{{ .date_created }}{{end}}</span></p>
+      </div>
+      <div class="col-sm-12 col-md-12 video-details-row duration">
+        <p class="video-details-meta">Duration: <span>{{if ne .channelEntityType "5"}}{{ .asset.prettyDuration }}{{end}}</span></p>
+      </div>
+      <div class="col-sm-12 col-md-12 video-details-row description">
+        <div class="desktop">{{if ne .channelEntityType "5"}}{{ replace .description "\n" "<br/>" | safeHTML }}{{end}}</div>
+        <div class="collapse mobile">{{if ne .channelEntityType "5"}}{{ replace .description "\n" "<br/>" | safeHTML }}{{end}}</div>
+      </div>
+      <div class="col-sm-12 col-md-12 video-details-row btn-more show-more">
+        <div class="btn-more-line"></div>
+        <div class="btn-more-btn-container">
+          <button type="button" class="btn btn-primary btn-more-button">SHOW MORE</button>
+        </div>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="transcript">
+      <div class="col-sm-12 col-md-12">
+      {{if ne .channelEntityType "5"}}
+        {{- if .transcripts -}}
+          {{- .transcripts | safeHTML -}}
+        {{- else -}}
+          <div>No transcript</div>
+        {{- end -}}
+      {{else}}
+        <div>No transcript</div>
+      {{end}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+{{ .Hugo.Generator }}
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="description" content="{{ .Params.description }}">
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content='{{ block "title" . }}{{ end }}{{ .Site.Title }}' />
+<meta property="og:description" content="{{ .Params.description }}" />
+<meta property="og:image" content="{{ .Permalink }}{{ .Type }}/images/logo.png" />

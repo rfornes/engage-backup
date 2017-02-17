@@ -1,0 +1,50 @@
+{{- $baseUrl := .Site.BaseURL -}}
+{{- range $element := .Site.Params.tvppages -}}
+    {{ if eq $element.code "channelgalleryids"  }}
+        {{ $.Scratch.Add "channelIds" $element.value }}
+    {{ end }}    
+{{- end -}}
+<script type="text/javascript">
+    TVSite = window.TVSite || {};
+    var apiVersion = {{ getenv "HUGO_API_URL" }};
+    TVSite.loginId = {{ .Site.Params.loginId }};
+    TVSite.apiUrl = apiVersion || "https:\/\/api.tvpage.com/v1/";
+    TVSite.baseUrl = "";
+    //checking page type
+    TVSite.isHomePage = ({{ .Params.videoid }} === "" && {{ .Params.channelid }} === "") ? true : false;
+    TVSite.isChannelPage = ({{ .Params.videoid }} === "" && {{ .Params.channelid }} !== "") ? true : false;
+    TVSite.isPlayerPage = (!TVSite.isHomePage && !TVSite.isChannelPage )? true : false;
+    TVSite.isSearchPage = {{ .Layout }} === "search" ? true : false;
+    TVSite.channelId = {{ .Params.channelid }};
+    if(TVSite.isHomePage){
+        TVSite.channelId = {{ ($.Scratch.Get "settings").homechannelid }};
+    }
+    TVSite.channelInfo = {{ ($.Scratch.Get "settings").channelData }} || {};
+    TVSite.channelIds = '{{ $.Scratch.Get "channelIds" }}';
+    (function() {
+        var ga = document.createElement("script");
+        ga.type = "text/javascript";
+        ga.async = true;
+        ga.src = ("https:" == document.location.protocol ? "https" : "http") + "://a.tvpage.com/tvpa.min.js";
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+
+    var _tvpa = _tvpa || [];
+    _tvpa.push(["config", {
+        "li": TVSite.loginId,
+        "gaDomain": "preview.bandh.tv",
+        "logUrl": "\/\/api.tvpage.com\/v1\/__tvpa.gif"
+    }]);
+    _tvpa.push(["track", "ci", { li: TVSite.loginId }]);
+
+</script>
+<!-- <script src="{{$baseUrl}}{{ .Type }}/js/vendor/underscore-min.js" ></script>
+<script src="{{$baseUrl}}{{.Type}}/js/vendor/modernizr.js"></script>
+<script src="{{$baseUrl}}{{.Type}}/js/vendor/jquery-3.1.1.min.js"></script>
+<script src="{{$baseUrl}}{{.Type}}/js/vendor/bootstrap.min.js"></script>
+<script src="{{$baseUrl}}{{.Type}}/js/vendor/slick.min.js"></script>
+<script src="{{$baseUrl}}{{.Type}}/js/vendor/iscroll-5.2.0.min.js"></script>
+<script src="{{$baseUrl}}{{.Type}}/js/vendor/jquery.lazyload.js"></script>
+<script src="{{$baseUrl}}{{.Type}}/js/main.js" type="text/javascript"></script> -->
+<script src="{{$baseUrl}}/{{.Type}}/js/build.js" type="text/javascript"></script>

@@ -1,0 +1,73 @@
+{{- $baseUrl := .Site.BaseURL -}}
+  <div class="header-bg">
+    <div class="container">
+      <div class="brand-header justify">
+        <div class="brand-header-search main-start cross-center">
+          <form class="brand-header-search-container">
+            <input id="tvp-desktop-search-input" type="text" placeholder="SEARCH" name="search">
+            <div id="brand-header-search-button" type="submit" class="brand-header-search-button"></div>
+            <p id="tvp-null-results" class="tvp-null-results"> No results found for: <span class="tvp-null-results-word"></span></p>
+            <p class="tvp-results-filler"></p>
+            <div id="tvp-desktop-search-results-holder" class="tvp-desktop-search-results-holder">
+                <div id="tvp-desktop-search-results" class="tvp-desktop-search-results">
+                    <ul></ul>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div class="brand-header-logo main-center cross-center">
+          <a class="logo" href="{{$baseUrl}}" type="submit" title="Return to homepage">
+        <img class="img-responsive" src='{{$baseUrl}}/{{ .Type }}/images/logo.png' alt="{{ .Site.Title }}" />
+        </a>
+        </div>
+        
+        <div class="brand-header-menu-top main-end cross-center">
+          <ul class="brand-header-menu-top-options">
+            {{- with .Site.Menus.top -}}
+            {{- range sort . "Name" "desc" -}}
+              <li><a class="{{ .Identifier }}-btn" href="{{.URL}}" 
+              {{- if eq .Name "Subscribe" -}} id="subscribe-header" 
+              {{ end }} >
+              {{- .Name -}}</a></li>
+              {{ end }}
+              {{- else -}}
+              No navigation
+            {{ end }}
+          </ul>
+        </div>  
+      </div>
+    </div>
+  </div>
+  {{- partial (printf "%s/subscribe_form.html" .Type) . -}}
+  <nav class="menu-bar">    
+    <div class="container">
+      <div class="collapse navbar-collapse">
+      <ul class="nav nav-justified justify">
+        {{- with .Site.Menus.main -}}
+        {{- range sort . "Weight" "desc" -}}
+          <li><a href="{{.URL}}">{{ .Name }}</li></a>
+        {{ end }}
+        {{- else -}}
+          No navigation
+        {{ end }}
+      </ul>    
+    </div>
+    <div class="container mobile-menu">
+      <div class="row">
+        <div class="col-xs-2 col-sm-2">
+          <button id="mobile-menu" type="button" class="mobile-menu-nav-btn navbar-toggle pull-left"></button>
+        </div>
+        <div class="col-xs-8 col-sm-8">
+          <a class="mobile-menu-logo" href="{{$baseUrl}}" title="Return to homepage">
+            <img class="img-responsive" src='{{$baseUrl}}/{{ .Type }}/images/logo.png' alt="{{ .Site.Title }}" />
+          </a>
+        </div>
+        <div class="col-xs-2 col-sm-2">
+          <button id="mobile-search" type="button" class="mobile-menu-search-btn navbar-toggle pull-right"></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  {{ partial (printf "%s/mobile_menu.html" .Type) . }}
+  {{ partial (printf "%s/mobile_search.html" .Type) . }}
+</header>

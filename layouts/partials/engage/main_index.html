@@ -1,0 +1,92 @@
+{{- $channel := index $.Site.Data.channels (printf "x%s" ($.Scratch.Get "settings").homechannelid ) -}}
+{{- if $channel -}}
+  {{- $.Scratch.SetInMap "settings" "channelData" $channel -}}
+{{ end }}
+{{- $baseUrl := .Site.BaseURL -}}
+<main id="main-content" class="main-content">
+	<div class="container">
+		<div class="row">
+			{{- partial (printf "%s/breadcrumbs.html" .Type) . -}}
+		</div>
+		<div class="row">
+				{{- range where .Site.Pages "Layout" "channel" -}}
+					{{- if in ($.Scratch.Get "settings").channelgalleryids .Params.channelid -}}
+					{{- $currentPage := index $.Site.Data.channels (printf "x%s" .Params.channelid ) -}}
+						<div class="col-xs-12 col-sm-6 col-md-6 featured-channel">
+							<article class="channel-items">
+								<a href="{{$baseUrl}}/{{ slicestr .URL 1}}/" class="content" >									
+									<img class="lazyImg" src="{{$baseUrl}}/{{ $.Type }}/images/channel/{{.Params.channelid}}.jpg" alt="{{ .Title }}">
+									<span class="featured-channel-container">
+										<span class="featured-channel-title">{{ .Title }}</span>
+									</span>
+								</a>
+							</article>
+							<div class="sub-channel row">
+								{{ if isset ($.Scratch.Get "settings") (printf "%ssubchannel" (.Title | lower)) }}
+									{{ $sub := (printf "%ssubchannel" (.Title | lower)) }}
+									{{ range $i, $val := ($.Scratch.Get "settings") }}
+										{{ if eq $i $sub }}
+											{{ range (split $val ",") }}
+												{{ $currentSubVal := index $.Site.Data.channels (printf "x%s" . ) }}
+												<a href="{{$baseUrl}}c/{{$currentSubVal.titleTextEncoded | lower}}/{{$currentSubVal.id}}" class="col-xs-3 text-center sub-channel-item">
+													<span>{{- replace $currentSubVal.title (printf "%s-" $currentPage.title) "" -}}</span>
+												</a>
+											{{ end}}
+										{{ end }}
+									{{ end }}
+								{{ end }}
+							</div>
+						</div>
+					{{ end }}
+				{{- end -}}
+		</div>
+		<h2 class="section-header">BRANDS</h2>
+		<div class="row">
+			<div class="col-sm-12">
+			<div class="slider">
+				{{- range where .Site.Pages "Layout" "channel" -}}
+					{{ if in ($.Scratch.Get "settings").channelsliderids .Params.channelid }}
+					<div>
+						<a href="{{ $baseUrl }}/{{ slicestr .URL 1}}" class="brand-item">
+							<div class="content">
+								<img data-lazy="{{$baseUrl}}/{{ .Type }}/images/{{.Params.channelid}}-logo.png" alt="{{ .Title }}">
+							</div>
+						</a>
+					</div>
+					{{ end }}
+				{{- end -}}   
+			</div>	
+			</div>
+		</div>
+		<h2 class="section-header">LATEST VIDEOS</h2>
+		<div id="tvp-video-container" class="row">
+			{{- $page := index $.Site.Data.channelVideos (printf "x%s_page_0" ($.Scratch.Get "settings").homechannelid) -}}
+			{{- with $page.data -}}
+				{{ $i := 0 }}
+				{{- range first 6 $page.data -}}
+					<div class="col-sm-4 col-md-4 latest-video-container">
+					    <a href="{{$baseUrl}}/{{slicestr .url 1}}/" class="latest-video" data-id="{{.id}}">				
+						<div class="latest-video-thumbnail">		
+						  <div class="content">
+					      	<img class="lazyImg" {{with .asset.thumbnailUrl}} data-original="{{ . }}"{{else}} data-original='{{$baseUrl}}/{{ $.Type }}/images/defaults/asset.png'{{end}}
+					      			alt="{{- .title -}}">
+					      		<div class="latest-video-hover">	      			
+									<div class="play-icon"></div>
+								</div>
+					      </div>
+						</div>
+						<p class="latest-video-title"><span>{{- .title -}}</span></p>
+						</a>
+					</div>
+					{{- if eq (mod (add $i 2) 3) 0 -}}<!--<div class="col-sm-12"></div>-->{{- end -}}
+				{{- end -}}
+			{{- end -}}
+		</div>
+		<div class="row container btn-more load-more">
+      		<div class="btn-more-line"></div>
+    		<div class="btn-more-btn-container">
+          		<button type="button" class="btn btn-primary btn-more-button">LOAD MORE</button>
+        	</div>
+    	</div>
+	</div>
+</main>

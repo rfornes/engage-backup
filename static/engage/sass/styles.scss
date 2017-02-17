@@ -1,0 +1,19 @@
+@import "variables";
+@import "bootstrap";
+@import "tvp_mixin";
+@import "flex";
+@import "slick";
+@import "desktop";
+@import "tablet";
+@import "player_product";
+@import "mobile";
+
+/////////////////////////////
+//// CAPTIVATE
+/////////////////////////////
+header a {
+	text-transform: uppercase;
+}
+input[type=text]::-ms-clear {
+    display: none;
+}

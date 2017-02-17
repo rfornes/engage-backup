@@ -1,0 +1,39 @@
+{{- $baseUrl := .Site.BaseURL -}}
+<div class="modal fade subcribeModal" id="subcribeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button data-dismiss="modal" class="close">          
+        </button>
+        <div class="subscribe-header">          
+	        <div class="subscribe-header-title modal-title" id="myModalLabel">
+            <div class="subscribe-header-title-container">
+              <span>SUBSCRIBE TO</span>
+              {{- if eq .Layout "channel" -}}<span class="channel-title">{{- .Title -}}</span>{{ end }}
+            </div>
+          </div>
+          <div class="subscribe-header-logo header-logo">
+	         <img src='{{ $baseUrl}}/{{ .Type }}/images/logo.png' alt="{{ .Site.Title }}" />
+          </div>
+		    </div>
+      </div>
+      <div class="modal-body subscribe-body">
+        <input type="text" placeholder="NAME">
+        <input type="text" placeholder="EMAIL" class="{{- if eq .Layout "channel" -}}channel-check{{end}}">	
+        {{- if eq .Layout "channel" -}}
+          <div class="chkSubscribeAll">
+            <input type="checkbox" name="" id="">Subscribe me  to all updates.
+          </div>
+        {{ end }}
+        <button type="button" class="pull-left subscribe-button">SUBSCRIBE</button>
+      </div>
+      <div class="modal-body subscribed-body">
+        <p class="text-center subscribed-title">THANKS FOR SUBSCRIBING</p>
+        <p class="text-center subscribed-message">You are now subscribed to receive updates when we add new videos.</p>
+        <div class="text-center">
+          <button data-dismiss="modal" type="button" class="subscribe-button">CLOSE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+header{
+	padding-top: 10px;
+	.branding{
+		max-width: 385px;
+		border-bottom: 1px solid #ddd;
+		margin-bottom: 10px;
+		padding-bottom: 5px;
+		text-align: center;
+		img{
+			width: 100%;
+			max-width: 215px;
+			height: auto;
+		}
+	}
+	.search{
+		position: relative;
+		margin-bottom: 10px;
+		input[type="text"]{
+		    font-size: 16px;
+		    padding: 10px 30px 10px 15px;
+			-webkit-appearance: none;
+			-webkit-border-radius: 0;
+			border: 3px solid #273691;
+			width: 95%;
+			height: 40px;
+			line-height: 1;
+		}
+		&-btn{
+			-webkit-transition: all .2s ease-in-out;
+			-moz-transition: all .2s ease-in-out;
+			-o-transition: all .2s ease-in-out;
+			transition: all .2s ease-in-out;
+			cursor: pointer;
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 40px;
+			height: 40px;
+			border: 1px solid #273691;
+			background-color: #273691;
+			background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUxMiA1MTIiIGhlaWdodD0iMjQiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSIyNCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBhdGggZD0iTTExMS42IDExMi4xYy01My41IDUzLjUtNTMuNiAxNDAuNC0wLjEgMTkzLjkgNDUuOCA0NS44IDExNiA1Mi4yIDE2OC42IDIwbDEwNSAxMDVjMTIuNSAxMi41IDMyLjggMTIuNSA0NS4zIDAgMTIuNS0xMi41IDEyLjUtMzIuOCAwLTQ1LjNMMzI1LjQgMjgwLjhjMzIuMi01Mi42IDI1LjgtMTIyLjgtMjAtMTY4LjZDMjUxLjkgNTguNyAxNjUuMiA1OC42IDExMS42IDExMi4xek0yNzQuNCAyNzQuOWMtMzYuNCAzNi40LTk1LjMgMzYuNC0xMzEuNiAwIC0zNi40LTM2LjQtMzYuNC05NS4zIDAtMTMxLjYgMzYuNC0zNi40IDk1LjMtMzYuNCAxMzEuNiAwQzMxMC44IDE3OS42IDMxMC44IDIzOC42IDI3NC40IDI3NC45ek0xMTEuNSAxMTJjMCAwIDAgMCAwIDBsMzEuMSAzMS4xYzAgMCAwIDAgMCAwIDM2LjQtMzYuNCA5NS4yLTM2LjQgMTMxLjYtMC4xIDM2LjQgMzYuNCAzNi4zIDk1LjItMC4xIDEzMS42IDAgMCAwIDAgMCAwbDE1Ni40IDE1Ni40YzEyLjUtMTIuNSAxMi41LTMyLjggMC00NS4zTDMyNS40IDI4MC44YzMyLjItNTIuNiAyNS43LTEyMi45LTIwLTE2OC42QzI1MS45IDU4LjYgMTY1LjEgNTguNSAxMTEuNSAxMTJ6IiBmaWxsPSIjZmZmIi8+PC9zdmc+);
+			background-repeat: no-repeat;
+			background-size: 30px 30px;
+			background-position: 50% 50%;
+		}
+	}
+}
+.sub-header{
+	background-color: #273691;
+	color: #fff;
+	button.mobile-menu{
+		background-color: transparent;
+		border-width: 0 1px;		
+		border-color: #fff;
+		width: 100%;
+		font-size: 16px;
+	}
+	.channels-menu-mobile {
+		border: 1px solid #ddd;
+		border-top: 0;
+		font-size: 14px;
+		font-family: 'FuturaStdLight', sans-serif;		
+		width: 100%;
+		position: absolute;
+		top: 35px;
+		left: 15px;
+		background-color: white;
+		padding: 10px 0;
+		z-index: 999999;
+	}
+}

@@ -1,0 +1,35 @@
+{{- $baseUrl := .Site.BaseURL -}}
+<nav class="breadcrumb-navigation">
+	<ul class="breadcrumb">
+		<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+			<a itemprop="url" href="{{$baseUrl}}">
+				<i class="fa fa-home" aria-hidden="true"></i>
+				<span itemprop="title">Home</span>
+			</a>
+		</li>
+		{{- if not (eq .Layout "home") -}}
+			{{- if eq .Layout "channel" -}}
+				{{- $channel := index $.Site.Data.channels (printf "x%s" .Params.channelid ) -}}
+				{{- if $channel -}}
+					<li id="breadcrumb-1" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="active"><a href='{{$baseUrl}}/{{ slicestr .URL 1}}/' itemprop="url"><span itemprop="title">{{ $channel.title }}</span></a></li>
+				{{ end }}
+			{{- else -}}
+				{{- $channel := index $.Site.Data.channels (printf "x%s" .Params.channelid ) -}}
+				{{- if $channel -}}
+					<li id="breadcrumb-1" itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href='{{$baseUrl}}/c/{{$channel.titleTextEncoded | lower}}/{{$channel.id}}/' itemprop="url"><span itemprop="title">{{ $channel.title }}</span></a></li>
+				{{ end }}
+			{{ end }}
+			{{- if eq .Layout "channelVideo" -}}
+				{{- $channel := index $.Site.Data.channels (printf "x%s" .Params.channelid ) -}}
+				{{- $video := index $.Site.Data.videos (printf "x%s" .Params.videoid ) -}}
+				{{- if $channel -}}
+					<li id="breadcrumb-2" itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="active">
+						<a itemprop="url" href='{{$baseUrl}}/{{ slicestr .URL 1}}/'>
+							<span itemprop="title">{{ .Title }}</span>
+						</a>
+					</li>
+				{{ end }}
+			{{ end }}
+		{{- end -}}
+	</ul>
+</nav>

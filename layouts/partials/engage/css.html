@@ -1,0 +1,31 @@
+{{- $baseUrl := .Site.BaseURL -}}
+@font-face {
+  font-family: 'FuturaStdHeavy';    
+  src: local('FuturaStdHeavy'), local('FuturaStdHeavy'), url("{{$baseUrl}}/{{.Type}}/fonts/Futura_Std_Heavy.otf") format('opentype');
+}
+@font-face {
+  font-family: 'FuturaStdLight';    
+  src: local('FuturaStdLight'), local('FuturaStdLight'), url("{{$baseUrl}}/{{.Type}}/fonts/Futura_Std_Light.otf") format('opentype');
+}
+@font-face {
+  font-family: 'FuturaStdMedium';
+  src: local('FuturaStdMedium'), local('FuturaStdMedium'), url("{{$baseUrl}}/{{.Type}}/fonts/Futura_Std_Light.otf") format('opentype');
+}
+body {
+	font-family: 'FuturaStdLight';
+}
+
+body {
+	background: #fff;
+}
+
+.main-content {
+	background: {{ ($.Scratch.Get "settings").mainbackground }};
+}
+
+.header-bg {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #fff;
+	background-size: cover;
+}

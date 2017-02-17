@@ -1,0 +1,60 @@
+{{- $baseUrl := .Site.BaseURL -}}
+<main id="main-content" class="main-content">
+<div class="tvp-404" >
+	<img class="tvp-404-img" src="{{.Site.BaseURL}}/{{.Type}}/images/404.jpg">
+</div>
+<div class="container">
+	<h2 class="section-header">BROWSE OUR BRANDS</h2>
+	<div class="row">
+		<div class="col-sm-12">
+		<div class="slider">
+			{{- range where .Site.Pages "Layout" "channel" -}}
+				{{ if in ($.Scratch.Get "settings").channelsliderids .Params.channelid }}
+				<div>
+					<a href="{{ $baseUrl }}/{{ slicestr .URL 1}}" class="brand-item">
+						<div class="content">
+							<img data-lazy="{{$baseUrl}}/{{ .Type }}/images/{{.Params.channelid}}-logo.png" alt="{{ .Title }}">
+						</div>
+					</a>
+				</div>
+				{{ end }}
+			{{- end -}}   
+		</div>	
+		</div>
+	</div>
+
+	<h2 class="section-header">BROWSE OUR CHANNELS</h2>
+	<div class="row">
+				{{- range where .Site.Pages "Layout" "channel" -}}
+					{{- if in ($.Scratch.Get "settings").channelgalleryids .Params.channelid -}}
+					{{- $currentPage := index $.Site.Data.channels (printf "x%s" .Params.channelid ) -}}
+						<div class="col-xs-12 col-sm-6 col-md-6 featured-channel">
+							<article class="channel-items">
+								<a href="{{$baseUrl}}/{{ slicestr .URL 1}}/" class="content" >									
+									<img class="lazyImg" src="{{$baseUrl}}/{{ $.Type }}/images/channel/{{.Params.channelid}}.jpg" alt="{{ .Title }}">
+									<span class="featured-channel-container">
+										<span class="featured-channel-title">{{ .Title }}</span>
+									</span>
+								</a>
+							</article>
+							<div class="sub-channel row">
+								{{ if isset ($.Scratch.Get "settings") (printf "%ssubchannel" (.Title | lower)) }}
+									{{ $sub := (printf "%ssubchannel" (.Title | lower)) }}
+									{{ range $i, $val := ($.Scratch.Get "settings") }}
+										{{ if eq $i $sub }}
+											{{ range (split $val ",") }}
+												{{ $currentSubVal := index $.Site.Data.channels (printf "x%s" . ) }}
+												<a href="{{$baseUrl}}c/{{$currentSubVal.titleTextEncoded | lower}}/{{$currentSubVal.id}}" class="col-xs-3 text-center sub-channel-item">
+													<span>{{- replace $currentSubVal.title (printf "%s-" $currentPage.title) "" -}}</span>
+												</a>
+											{{ end}}
+										{{ end }}
+									{{ end }}
+								{{ end }}
+							</div>
+						</div>
+					{{ end }}
+				{{- end -}}
+		</div>
+</div>
+</main>

@@ -1,0 +1,32 @@
+{{- partial (printf "%s/dochead.html" .Type) . -}}
+{{- partial (printf "%s/header.html" .Type) . -}}
+	<div class="container mobile-subscribe-form">
+		<div class="subscribe-header">          
+			<!-- <div class="subscribe-header-title" id="myModalLabel"> -->
+			<div class="subscribe-header-title-container">
+				<span>SUBSCRIBE TO</span>				
+			</div>
+			<div class="subscribe-header-logo">
+				<img src='/{{ .Type }}/images/logo.png' alt="{{ .Site.Title }}" />
+			</div>
+			<div class="channel-title">{{ .Title }}</div>
+		</div>
+		<div class="subscribe-body">
+			<input id="name" type="text" placeholder="NAME">
+			<input id="mail" type="text" placeholder="EMAIL" class="{{ if eq .Layout "channel" }}channel-check{{end}}">	
+			{{ if eq .Layout "channel" }}
+			  <div class="chkSubscribeAll">
+			    <input type="checkbox" name="" id="">Subscribe me  to all updates.
+			  </div>
+			{{ end }}
+			<button type="button" class="subscribe-button">SUBSCRIBE</button>
+		</div>
+		<div class="subscribed-body" style="display: none">
+			<p class="text-center subscribed-title">THANKS FOR SUBSCRIBING</p>
+			<p class="text-center subscribed-message">You are now subscribed to receive updates when we add new videos.</p>
+			<div class="text-center">
+			  <button type="button" class="subscribe-close-button">CLOSE</button>
+			</div>
+		</div>
+	</div>
+{{- partial (printf "%s/scripts.html" .Type) . -}}

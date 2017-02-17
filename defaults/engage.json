@@ -1,0 +1,78 @@
+{
+    "option": [
+        {
+            "for": "styles",
+            "type": "text",
+            "label": "Google Font",
+            "code": "googlefont",
+            "value": "//fonts.googleapis.com/css?family=Dosis:400,700"
+        },
+        {
+            "for": "styles",
+            "type": "text",
+            "label": "Font Family",
+            "code": "fontfamily",
+            "value": "Dosis"
+        },
+        {
+            "for": "styles",
+            "type": "text",
+            "label": "Body Background",
+            "code": "bodybackground",
+            "value": "white"
+        },
+        {
+            "for": "styles",
+            "type": "text",
+            "label": "Main Background",
+            "code": "mainbackground",
+            "value": "white"
+        },
+        {
+            "for": "styles",
+            "type": "text",
+            "label": "Header Background",
+            "code": "headerbackground",
+            "value": "#2C6373"
+        },
+        {
+            "type": "text",
+            "label" : "Channel Gallery Ids",
+            "code" : "channelgalleryids",
+            "value" : ""
+        },
+        {
+            "type": "text",
+            "label" : "Channel Slider Ids",
+            "code" : "channelsliderids",
+            "value" : ""
+            
+        },
+        {
+            "type": "text",
+            "label" : "Home Channel Id",
+            "code" : "homechannelid",
+            "value" : ""
+        },
+        {
+            "type": "text",
+            "label" : "favicon",
+            "code" : "favicon",
+            "value" : ""
+        },
+        {
+            "for": "player",
+            "type": "boolean",
+            "label": "Autoplay",
+            "code": "autoplay",
+            "value": true
+        },
+        {
+            "for": "player",
+            "type": "boolean",
+            "label": "Autoend",
+            "code": "autoend",
+            "value": true
+        }
+    ]
+}
